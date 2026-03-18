@@ -1,4 +1,5 @@
 import { useState } from "react"
+import axios from "axios"
 
 function AppMain() {
 
@@ -9,7 +10,7 @@ function AppMain() {
     gridCheck: false
   })
 
-  function handleFormSubmit(e) {
+  async function handleFormSubmit(e) {
     e.preventDefault()
   }
 
@@ -18,6 +19,13 @@ function AppMain() {
     setFormInput({...formInput, [e.target.name] : inputValue})
     console.log(formInput)
   }
+
+// Richiesta POST
+axios({
+  method: "post",
+  url: "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts",
+  data: formInput
+});
 
   return (
     <main>
