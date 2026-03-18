@@ -1,2 +1,16 @@
 @import 'bootstrap';
 @import 'bootstrap-icons';
+
+.card-body {
+    min-height: 20rem;
+
+    .card-header {
+        margin-bottom: 2px solid black;
+        min-height: 25%;
+    }
+
+    .text-center {
+        overflow: auto;
+        scrollbar-width: thin; 
+    }
+}
