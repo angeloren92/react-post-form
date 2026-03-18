@@ -1,7 +1,10 @@
 import { useState } from "react"
 import axios from "axios"
+import AppCards from './AppCards'
 
 function AppMain() {
+
+  const apiUrl = "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts"
 
   const [formInput, setFormInput] = useState({
     author: '',
@@ -12,25 +15,25 @@ function AppMain() {
 
   async function handleFormSubmit(e) {
     e.preventDefault()
+
+      const response = await axios({
+      method: "post",
+      url: apiUrl,
+      data: formInput
+    })
+    console.log(response.data)
   }
 
   function handleInputData(e) {
     const inputValue = e.target.type === 'checkbox' ? e.target.checked : e.target.value
     setFormInput({...formInput, [e.target.name] : inputValue})
-    console.log(formInput)
+
   }
 
-// Richiesta POST
-axios({
-  method: "post",
-  url: "https://67c5b4f3351c081993fb1ab6.mockapi.io/api/posts",
-  data: formInput
-});
-
   return (
-    <main>
+    <main className="bg-light vh-100">
       <div className="container">
-        <form className="row g-3" onSubmit={handleFormSubmit}>
+        <form className="row g-3 pt-3" onSubmit={handleFormSubmit}>
           <div className="col-12">
             <label htmlFor="author" className="form-label">Autore</label>
             <input type="text" className="form-control" id="author" name="author" placeholder="Nome Autore" onChange={handleInputData} value={formInput.author}/>
@@ -55,6 +58,7 @@ axios({
             <button type="submit" className="btn btn-primary">Aggiungi</button>
           </div>
         </form>
+        <AppCards apiUrl={apiUrl}/>
       </div>
     </main>
   )
